@@ -25,7 +25,6 @@ func Atoi64(s string) (int64, error) {
 	return n, errors.Wrap(err, "can't parse int")
 }
 
-
 // Atof64 converts 10-based string into float64 value.
 func Atof64(s string) (float64, error) {
 	s = strings.TrimSpace(s)
