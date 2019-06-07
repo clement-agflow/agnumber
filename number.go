@@ -32,6 +32,16 @@ func Atof64(s string) (float64, error) {
 	return f, errors.Wrap(err, "can't parse float")
 }
 
+// MustAtoi64 is similar to Atoi64.
+// But it panics if the input can't be parse as an int64
+func MustAtoi64(s string) int64 {
+	i, err := Atoi64(s)
+	if err != nil {
+		panic(err)
+	}
+	return i
+}
+
 func reduceIntSlice(a []int, start int, reduce func(float64, float64) float64) int {
 	if len(a) == 0 {
 		return start

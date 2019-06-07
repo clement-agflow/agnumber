@@ -32,6 +32,18 @@ func TestAtoi64(t *testing.T) {
 	require.NotNil(t, err)
 }
 
+func TestMustAtoi64(t *testing.T) {
+	n := MustAtoi64("     12\n")
+	require.Equal(t, int64(12), n)
+
+	n = MustAtoi64("12")
+	require.Equal(t, int64(12), n)
+
+	require.Panicsf(t, func() { MustAtoi64("12.0")}, "did not panic for 12.0")
+	require.Panicsf(t, func() { MustAtoi64("12,0")}, "did not panic for 12,0")
+	require.Panicsf(t, func() { MustAtoi64("12c")}, "did not panic for 12c")
+}
+
 func TestAtof64(t *testing.T) {
 	n, err := Atof64("    12")
 	require.Nil(t, err)
