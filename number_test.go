@@ -64,6 +64,22 @@ func TestAtof64(t *testing.T) {
 	require.NotNil(t, err)
 }
 
+
+func TestMustAtof64(t *testing.T) {
+	n := MustAtof64("     12\n")
+	require.Equal(t, float64(12), n)
+
+	n = MustAtof64("12")
+	require.Equal(t, float64(12), n)
+
+	n = MustAtof64("12.1")
+	require.Equal(t, 12.1, n)
+
+	require.Panicsf(t, func() { MustAtof64("12,0")}, "did not panic for 12,0")
+	require.Panicsf(t, func() { MustAtof64("12c")}, "did not panic for 12c")
+}
+
+
 func TestMinMax(t *testing.T) {
 	testCases := []struct {
 		input    []int
